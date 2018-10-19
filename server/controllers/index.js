@@ -20,7 +20,7 @@ const defaultDogData = {
 };
 
 // object for us to keep track of the last Cat we made and dynamically update it sometimes
-let lastCatAdded = new Cat(defaultCatData);
+//let lastCatAdded = new Cat(defaultCatData);
 
 // Create a doggy
 let lastDogAdded = new Dog(defaultDogData);
