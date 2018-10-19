@@ -165,13 +165,6 @@ const getName = (req, res) => {
   res.json({ name: lastAdded.name });
 };
 
-const getCatName = (req, res) => {
-  // res.json returns json to the page.
-  // Since this sends back the data through HTTP
-  // you can't send any more data to this user until the next response
-  res.json({ name: lastCatAdded.name });
-};
-
 const getDogName = (req, res) => {
   // res.json returns json to the page.
   // Since this sends back the data through HTTP
@@ -223,35 +216,6 @@ const setName = (req, res) => {
   return res;
 };
 
-const setCatName = (req, res) => {
-  if (!req.body.firstname || !req.body.lastname || !req.body.beds) {
-    return res.status(400).json({ error: 'firstname,lastname and beds are all required' });
-  }
-
-  // if required fields are good, then set name
-  const name = `${req.body.firstname} ${req.body.lastname}`;
-
-  // dummy JSON to insert into database
-  const catData = {
-    name,
-    bedsOwned: req.body.beds,
-  };
-
-  const newCat = new Cat(catData);
-
-  const savePromise = newCat.save();
-
-  savePromise.then(() => {
-    lastCatAdded = newCat;
-    lastAdded = lastCatAdded;
-    res.json({ name: lastCatAdded.name, beds: lastCatAdded.bedsOwned });
-  });
-
-  // if error, return it
-  savePromise.catch(err => res.json({ err }));
-
-  return res;
-};
 
 const setDogName = (req, res) => {
   if (!req.body.firstname || !req.body.lastname || !req.body.breed || !req.body.age) {
